@@ -124,6 +124,12 @@ button:hover {
 }
 
 
+/* This adds some space above the Share button in the popup */
+.share-button {
+    margin-top: 10px;
+    padding: 10px 16px;
+    font-size: 14px;
+}
 
 
 /* This adjusts the search form for smaller screens */

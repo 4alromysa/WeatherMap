@@ -9,8 +9,12 @@ let map;
 // This keeps the current marker so we can remove it before adding a new one
 let currentMarker;
 
+// This keeps the weather message that the Share button will send
+let currentWeatherText;
+
 /* This function creates the map and displays it on the page */
 function initializeMap() {
+
    map = L.map("map").setView([15.5007, 32.5599], 6);
 
     // This adds the map tiles from OpenStreetMap
@@ -48,6 +52,9 @@ function hideError() {
 
 // This calls the function to show the map
 initializeMap();
+
+// This runs the setup function every time a popup opens on the map
+map.on("popupopen", setupShareButton);
 
 
 /* This function gets the coordinates of the city from the API */
@@ -119,11 +126,65 @@ function showWeatherOnMap(lat, lon, weather) {
         <p>Clouds: ${weather.clouds.all}%</p>
         <p>Humidity: ${weather.main.humidity}%</p>
         <p>Wind: ${weather.wind.speed} m/s</p>
+        <button class="share-button">Share Weather</button>
     `;
 
+
+        // This builds the message that will be shared
+    currentWeatherText = `Weather in ${weather.name}: ${Math.round(weather.main.temp)}°C, ${weather.weather[0].description}. Humidity: ${weather.main.humidity}%, Wind: ${weather.wind.speed} m/s.`;
+    
     // This adds the new marker, connects the popup to it, and opens it
     currentMarker = L.marker([lat, lon]).addTo(map);
     currentMarker.bindPopup(popupContent).openPopup();
+}
+
+
+
+/* This function shares the weather message or copies it to the clipboard */
+async function shareWeather(event) {
+
+    // This saves the button that was clicked
+    const button = event.target;
+
+    try {
+        // This uses the share window if the browser supports it
+        if (navigator.share) {
+            await navigator.share({
+                title: "WeatherMap",
+                text: currentWeatherText
+            });
+
+        } else {
+            // Otherwise we copy the message to the clipboard
+            await navigator.clipboard.writeText(currentWeatherText);
+
+            // This tells the user that the message was copied
+            button.textContent = "Copied!";
+
+            // This changes the button text back after 2 seconds
+            setTimeout(function () {
+                button.textContent = "Share Weather";
+            }, 2000);
+        }
+
+    } catch (error) {
+        // This ignores the case where the user closed the share window
+        if (error.name !== "AbortError") {
+            showError("Could not share the weather.");
+        }
+    }
+}
+
+/* This function connects the Share button every time a popup opens */
+function setupShareButton(event) {
+
+    // This finds the Share button inside the popup
+    const shareButton = event.popup.getElement().querySelector(".share-button");
+
+    // This runs the share function when the button is clicked
+    if (shareButton) {
+        shareButton.addEventListener("click", shareWeather);
+    }
 }
 
 
