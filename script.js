@@ -63,9 +63,9 @@ async function getCityCoordinates(city) {
     // This prepares the city name for the API link
     const cityName = encodeURIComponent(city);
 
-    // This sends a request to search for the city
+     // This sends a request to search only for cities and towns
     const response = await fetch(
-        `https://nominatim.openstreetmap.org/search?city=${cityName}&format=json&limit=1`
+        `https://nominatim.openstreetmap.org/search?q=${cityName}&featureType=city&format=json&limit=1`
     );
 
     // This checks if the request failed
