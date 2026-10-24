@@ -1,0 +1,99 @@
+
+/* This sets the basic style for all elements */
+* {
+    box-sizing: border-box;
+}
+
+/* This styles the page and adds the background image */
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-image: url("images/sunset.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #243047;
+}
+
+/* This styles the website title and description */
+header {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 18px;
+}
+
+/* This keeps the main content organized */
+main {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* This styles the city search form */
+#weather-form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+/* This styles the city input */
+#city-input {
+    width: 300px;
+    max-width: 100%;
+    padding: 14px;
+    border: 1px solid #a6a6b8;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+/* This styles the search button */
+button {
+    padding: 14px 22px;
+    background-color: #5969b5;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* This changes the button color when the mouse is over it */
+button:hover {
+    background-color: #40529b;
+}
+
+/* This styles the map section */
+#map-section h2 {
+    text-align: center;
+}
+
+/* This creates the space where the map will appear */
+#map {
+    height: 70vh;
+    border: 3px solid #243047;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.65);
+}
+
+/* This adjusts the search form for smaller screens */
+@media (max-width: 600px) {
+    #weather-form {
+        flex-direction: column;
+    }
+
+    #city-input,
+    button {
+        width: 100%;
+    }
+}
