@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherMap</title>
+</head>
+
+<body>
+    <!-- This section contains the website title -->
+    <header>
+        <h1>WeatherMap</h1>
+        <p>Explore the weather around the world</p>
+    </header>
+
+    <main>
+        <!-- This form lets the user search for a city -->
+        <form id="weather-form">
+            <input
+                type="text"
+                id="city-input"
+                placeholder="Enter a city name"
+                required
+            >
+            <button type="submit">Get Weather</button>
+        </form>
+
+        <!-- This section will display the weather map -->
+        <section id="map-section">
+            <h2>Weather Map</h2>
+            <div id="map"></div>
+        </section>
+    </main>
+</body>
+</html>
