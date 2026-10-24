@@ -20,6 +20,32 @@ function initializeMap() {
 
 }
 
+
+
+/* This function shows the loading spinner */
+function showLoading() {
+    document.getElementById("loading-spinner").classList.remove("hidden");
+}
+
+/* This function hides the loading spinner */
+function hideLoading() {
+    document.getElementById("loading-spinner").classList.add("hidden");
+}
+
+/* This function shows the error card with a message for the user */
+function showError(message) {
+    const errorCard = document.getElementById("error-card");
+    errorCard.textContent = message;
+    errorCard.classList.remove("hidden");
+}
+
+/* This function hides the error card */
+function hideError() {
+    document.getElementById("error-card").classList.add("hidden");
+}
+
+
+
 // This calls the function to show the map
 initializeMap();
 
@@ -56,6 +82,7 @@ async function getCityCoordinates(city) {
 }
 
 
+
 /* This function gets the current weather for a place from OpenWeatherMap */
 async function getWeather(lat, lon) {
 
@@ -72,6 +99,8 @@ async function getWeather(lat, lon) {
     // This converts the response into JavaScript data and returns it
     return await response.json();
 }
+
+
 
 /* This function puts a marker on the map and shows the weather in a popup */
 function showWeatherOnMap(lat, lon, weather) {
@@ -133,6 +162,10 @@ async function handleCitySearch(event) {
     // This gets the city name from the search input
     const city = document.getElementById("city-input").value.trim();
 
+    // This clears the old error and shows the spinner
+    hideError();
+    showLoading();
+
     try {
         // This gets the coordinates of the city
         const coordinates = await getCityCoordinates(city);
@@ -147,8 +180,16 @@ async function handleCitySearch(event) {
         showWeatherOnMap(coordinates.lat, coordinates.lon, weather);
 
     } catch (error) {
-        // This shows a message if something fails
-        alert(error.message);
+        // A TypeError here usually means the internet is not working
+        if (error instanceof TypeError) {
+            showError("Please check your internet connection and try again.");
+        } else {
+            showError(error.message);
+        }
+
+    } finally {
+        // This always hides the spinner, whether it worked or not
+        hideLoading();
     }
 }
 
