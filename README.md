@@ -2,7 +2,7 @@
 
 This is my WeatherMap project 
 
-Name: الرميصاس حسن محمد علي الشامي - قسم هندسة برمحيات
+Name: الرميصاء حسن محمد علي الشامي - قسم هندسة برمحيات
 
 ## About the project
 
