@@ -8,6 +8,12 @@ Name: الرميصاس حسن محمد علي الشامي - قسم هندسة �
 
 WeatherMap is a single page web app. You type the name of a city, and the app shows the current weather of that city in a popup on an interactive map. The page does not reload.
 
+## How to run
+
+1. Open the project folder in VS Code.
+2. Install the Live Server extension.
+3. Right click `index.html` and choose **Open with Live Server**.
+
 ## How it works
 
 1. The map starts on Khartoum, Sudan.
@@ -35,10 +41,6 @@ WeatherMap is a single page web app. You type the name of a city, and the app sh
 - Share Weather button
 - Works on phones and computers
 
-## How to run
 
-1. Open the project folder in VS Code.
-2. Install the Live Server extension.
-3. Right click `index.html` and choose **Open with Live Server**.
 
 
